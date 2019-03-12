@@ -1,15 +1,16 @@
 import Component from '../components/Map';
-import {changeCurrentCoord} from '../actions/CoordAction';
+import {changeCurrentCoord} from '../actions/MapAction';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (store) => {
   return {
-    currentCoord: store.coord.currentCoord,
+    currentCoord: store.map.currentCoord,
+    points: store.points.points,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentCoord: (x, y) => dispatch(changeCurrentCoord(x, y)),
+  changeCurrentCoord: (lat, lng) => dispatch(changeCurrentCoord(lat, lng)),
 });
 
 export default connect(

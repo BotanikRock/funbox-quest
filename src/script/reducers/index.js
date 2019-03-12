@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import pointsReducer from './points';
-import coordReducer from './coord';
+import mapReducer from './map';
 
 
 const reducers = combineReducers({
   points: pointsReducer,
-  coord: coordReducer,
+  map: mapReducer,
 });
 
 export default reducers;

@@ -1,8 +1,8 @@
 const CHANGE_CURRENT_COORD = 'CHANGE_CURRENT_COORD';
 
-const changeCurrentCoord = (x, y) => ({
+const changeCurrentCoord = ({lat, lng}) => ({
   type: CHANGE_CURRENT_COORD,
-  payload: {x, y},
+  payload: {lat, lng},
 });
 
 export {

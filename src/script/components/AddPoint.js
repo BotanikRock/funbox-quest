@@ -4,11 +4,19 @@ import React, {Component} from 'react';
 /**
  */
 export class AddPoint extends Component {
+  state = {
+    pointName: '',
+  };
+
   /**
   * @param {Event} e
   **/
   submitHandler = (e) => {
     e.preventDefault();
+
+    if (this.props.isRequesting) {
+      return;
+    }
 
     const {pointName} = this.state;
 
@@ -16,9 +24,11 @@ export class AddPoint extends Component {
       return;
     }
 
-    const {x, y} = this.props.currentCoord;
+    const {lat, lng} = this.props.currentCoord;
 
-    this.props.addPoint(pointName, x, y);
+
+    this.props.addPoint(pointName, lat, lng);
+    this.setState({pointName: ''});
   }
 
   /**
@@ -34,7 +44,7 @@ export class AddPoint extends Component {
   render() {
     return (
       <form onSubmit={this.submitHandler} className="add-point">
-        <input onChange={this.inputHandler} type="text" className="add-point__input"/>
+        <input onChange={this.inputHandler} type="text" className="add-point__input" value={this.state.pointName} autoFocus/>
         <button type="submit" className="add-point__submit">Добавить</button>
       </form>
     );

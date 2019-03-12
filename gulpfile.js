@@ -23,6 +23,7 @@ const paths = {
     script: `${srcRoot}script/`,
     html: `${srcRoot}index.html`,
     style: [
+      `${srcRoot}style/_var.sass`,
       `${srcRoot}style/vendors/**/*.sass`,
       `${srcRoot}style/helpers/**/*.sass`,
       `${srcRoot}style/blocks/**/*.sass`,

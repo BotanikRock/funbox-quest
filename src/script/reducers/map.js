@@ -1,16 +1,16 @@
-import {CHANGE_CURRENT_COORD} from '../actions/CoordAction';
+import {CHANGE_CURRENT_COORD} from '../actions/MapAction';
 
 const initialState = {
-  currentCoord: {x: 55.753821, y: 37.619900},
+  currentCoord: {lat: 55.753821, lng: 37.619900},
   // TODO откуда брать начальную координату?
 };
 
 const reducer = (state = initialState, {type, payload}) => {
   switch (type) {
     case CHANGE_CURRENT_COORD:
-      const {x, y} = payload;
+      const {lat, lng} = payload;
 
-      return {...state, currentCoord: {x, y}};
+      return {...state, currentCoord: {lat, lng}};
     default:
       return state;
   }

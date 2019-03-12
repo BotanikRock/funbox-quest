@@ -12,15 +12,13 @@ class App extends React.Component {
    */
   render() {
     return [
-      <div className="wrapper">
-        <div className="half-wrapper">
+      <div className="wrapper" key="main">
+        <div className="half-wrapper half-wrapper--right">
           <AddPoint/>
           <PointList/>
         </div>
       </div>,
-      <div className="map-container">
-        <Map/>
-      </div>,
+      <Map key="map"/>,
     ];
   }
 }

@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (store) => {
   return {
-    currentCoord: store.coord.currentCoord,
+    currentCoord: store.map.currentCoord,
+    isRequesting: store.points.isRequesting,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addPoint: (name, x, y) => dispatch(addPoint(name, x, y)),
+  addPoint: (name, lat, lng) => dispatch(addPoint(name, lat, lng)),
 });
 
 export default connect(

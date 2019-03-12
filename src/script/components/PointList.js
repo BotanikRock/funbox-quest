@@ -10,8 +10,11 @@ export default class PointList extends Component {
   render() {
     return (
       <div className="point-list">
-        {this.props.points.map(({name}, index) =>
-          <Point name={name} index={index} parentClassName="point-list__item"/>
+        {this.props.points.map(({name, address}, index) =>
+          <Point
+            key={`${name}-${index}`}
+            name={name} index={index} address={address}
+            parentClassName="point-list__item"/>
         )}
       </div>
     );
