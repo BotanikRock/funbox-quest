@@ -1,21 +1,9 @@
-const moveItemInArray = (arr, oldIndex, newIndex, origArr) => {
-  return arr.reduce((cur, acc, index) => {
-    let item;
+const moveItemInArray = (arr, oldIndex, newIndex) => {
+  const newArr = [...arr];
 
-    if (index < oldIndex && newIndex < index) {
-      item = cur;
-    }
+  newArr.splice(newIndex, 0, newArr.splice(oldIndex, 1)[0]);
 
-    if (oldIndex >= index && index < newIndex) {
-      item = origArr[index + 1];
-    }
-
-    if (index === newIndex) {
-      item = origArr[oldIndex];
-    }
-
-    return [...acc, item];
-  }, []);
+  return newArr;
 };
 
 export {moveItemInArray};

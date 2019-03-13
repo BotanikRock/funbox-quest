@@ -1,5 +1,5 @@
 import {
-  ADD_POINT_REQUEST, ADD_POINT_SUCCESS, REMOVE_POINT, CHANGE_POINT_ORDER, CHANGE_POINT,
+  ADD_POINT_REQUEST, ADD_POINT_SUCCESS, REMOVE_POINT, CHANGE_POINT_ORDER, CHANGE_POINT_SUCCESS,
 } from '../actions/PointAction';
 import {moveItemInArray} from '../helpers';
 
@@ -25,7 +25,7 @@ export default (state = initialState, {type, payload}) => {
         points: points.filter(
             (_, pointIndex) => pointIndex !== pointIndexToRemove)};
 
-    case CHANGE_POINT:
+    case CHANGE_POINT_SUCCESS:
       const {pointIndex, newAttrs} = payload;
 
       return {...state, points: points.map((point, index) =>
@@ -35,7 +35,9 @@ export default (state = initialState, {type, payload}) => {
     case CHANGE_POINT_ORDER:
       const {oldIndex, newIndex} = payload;
 
-      return {...state, points: moveItemInArray(points, oldIndex, newIndex)};
+      const s = moveItemInArray(points, oldIndex, newIndex);
+
+      return {...state, points: s};
     default:
       return state;
   }

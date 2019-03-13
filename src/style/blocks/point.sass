@@ -1,6 +1,14 @@
 @import '../_var';
 
-$border: 2px solid $baseColor
+$border: 3px solid $baseColor
+
+@mixin insert()
+  content: ''
+  position: absolute
+  left: 0
+  height: 3px
+  width: 100%
+  background-color: $secondaryColor
 
 .point
   position: relative
@@ -8,6 +16,18 @@ $border: 2px solid $baseColor
   align-items: center
   border-bottom: $border
   padding: 5px 0
+  
+  &--insert
+    &-before
+      &:before
+        @include insert()
+        top: -3px
+
+    &-after
+      &:after
+        @include insert()
+        bottom: -3px
+      
 
   &:first-child
     border-top: $border
@@ -15,7 +35,7 @@ $border: 2px solid $baseColor
   &__address
     display: none
     position: absolute
-    top: calc(100% - 2px)
+    top: calc(100% - 3px)
     left: 0
     width: 100%
     padding: 5px 5px
@@ -55,4 +75,4 @@ $border: 2px solid $baseColor
 
   &:hover
     .point__address
-      display: block
+      display: none

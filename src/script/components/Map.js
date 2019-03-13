@@ -30,6 +30,12 @@ class MarkerWithInfo extends React.Component {
     });
   }
 
+  dragEnd = (e) => {
+    const newPos = e.latLng.toJSON();
+
+    this.props.changePos(newPos);
+  }
+
   /**
    * @return {JSX}
    */
@@ -37,6 +43,8 @@ class MarkerWithInfo extends React.Component {
     const {lat, lng, pos, info} = this.props;
 
     return (<Marker
+      onDragEnd={this.dragEnd}
+      draggable={true}
       onClick={this.show}
       position={{lat, lng}}
       label={`${pos}`}>
@@ -63,16 +71,6 @@ class Map extends Component {
    this.props.changeCurrentCoord(center);
  }
 
- /**
-  * @param {Object} nextProps
-  * @return {Boolean}
-  */
- shouldComponentUpdate(nextProps) {
-   if (this.props.points !== nextProps.points) {
-     return true;
-   }
-   return false;
- }
 
  /**
   * @param {Array} markerOptions
@@ -82,12 +80,27 @@ class Map extends Component {
    const markers = markerOptions.map((markerOpt, index) => {
      const {lat, lng} = markerOpt.toJSON();
 
-     const props = {lat, lng, pos: index + 1, info: this.props.points[index].name};
+     const props =
+      {lat, lng, pos: index + 1, info: this.props.points[index].name};
 
-     return <MarkerWithInfo key={index}{...props}/>;
+     return <MarkerWithInfo
+       key={index}
+       changePos={(newPos) => this.props.changePoint(index, newPos)}
+       {...props}/>;
    });
 
    return markers;
+ }
+
+ /**
+  * @param {Object} nextProps
+  * @return {Boolean}
+  */
+ shouldComponentUpdate(nextProps) {
+   if (this.props.points !== nextProps.points) {
+     return true;
+   }
+   return false;
  }
 
  /**
@@ -155,8 +168,7 @@ class Map extends Component {
        defaultZoom={8}
        defaultCenter={{lat, lng}}
        ref={(map) => this._map = map}
-       onCenterChanged={this.setCoord}
-       onBoundsChanged={this.setCoord}>
+       onCenterChanged={this.setCoord}>
        {directions && <DirectionsRenderer
          directions={this.state.directions}
          options={this.state.directionOptions}/>}
