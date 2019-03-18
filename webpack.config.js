@@ -1,4 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
+
+const gmKey = process.argv[3].slice(2);
 
 module.exports = {
   entry: './src/script/index.js',
@@ -17,4 +20,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      API: {
+        GM: JSON.stringify(gmKey),
+      },
+    }),
+  ],
 };

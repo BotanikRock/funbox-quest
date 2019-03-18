@@ -4,10 +4,12 @@ import {changePoint} from '../actions/PointAction';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (store) => {
-  return {
-    currentCoord: store.map.currentCoord,
-    points: store.points.points,
-  };
+  const {
+    map: {currentCoord, directions},
+    points: {points},
+  } = store;
+
+  return {currentCoord, points, directions};
 };
 
 const mapDispatchToProps = (dispatch) => ({

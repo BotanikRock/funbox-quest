@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "prod:build": "export NODE_ENV=production && gulp prod:build",
-    "dev:server": "export NODE_ENV=development && gulp dev:server"
+    "prod:build": "export NODE_ENV=production && gulp prod:build --$(cat .gmkey)",
+    "dev:server": "export NODE_ENV=development && gulp dev:server --$(cat .gmkey)"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",

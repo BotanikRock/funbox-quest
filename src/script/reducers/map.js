@@ -1,8 +1,11 @@
-import {CHANGE_CURRENT_COORD} from '../actions/MapAction';
+import {
+  CHANGE_CURRENT_COORD,
+  BUILD_ROUTE_SUCCESS,
+} from '../actions/MapAction';
 
 const initialState = {
   currentCoord: {lat: 55.753821, lng: 37.619900},
-  // TODO откуда брать начальную координату?
+  directions: null,
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -11,6 +14,10 @@ const reducer = (state = initialState, {type, payload}) => {
       const {lat, lng} = payload;
 
       return {...state, currentCoord: {lat, lng}};
+    case BUILD_ROUTE_SUCCESS:
+      const {directions} = payload;
+      
+      return {...state, directions};
     default:
       return state;
   }

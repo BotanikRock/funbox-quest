@@ -41,7 +41,7 @@ export default class PointItem extends Component {
     const {middleHeight, posY} = this.getElementMiddleAndCurPosY(e);
 
     const modClassName = posY < middleHeight ? 'point--insert-before' : 'point--insert-after';
-    
+
     this.setState({modClassName});
   }
 
