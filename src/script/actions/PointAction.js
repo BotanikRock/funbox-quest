@@ -87,14 +87,14 @@ class AddressRequester {
 const addPoint = (name, lat, lng) => (dispatch, getState) => {
   const requester = new AddressRequester({name, lat, lng}, dispatch, getState);
 
-  requester.request('add')
+  return requester.request('add')
       .then((points) => dispatch(buildRoute(points)));
 };
 
 const changePoint = (pointIndex, newAttrs) => (dispatch, getState) => {
   const requester = new AddressRequester({pointIndex, ...newAttrs}, dispatch, getState);
 
-  requester.request('change')
+  return requester.request('change')
       .then((points) => dispatch(buildRoute(points)));
 };
 
@@ -104,7 +104,11 @@ const removePoint = (pointIndex) => (dispatch, getState) => {
     payload: {pointIndex},
   });
 
-  dispatch(buildRoute(getState().points.points));
+  const buildPromise = buildRoute(getState().points.points);
+
+  dispatch(buildPromise);
+
+  return buildPromise;
 };
 
 const changePointOrder = (oldIndex, newIndex) => (dispatch, getState) => {
@@ -113,7 +117,11 @@ const changePointOrder = (oldIndex, newIndex) => (dispatch, getState) => {
     payload: {oldIndex, newIndex},
   });
 
-  dispatch(buildRoute(getState().points.points));
+  const buildPromise = buildRoute(getState().points.points);
+
+  dispatch(buildPromise);
+
+  return buildPromise;
 };
 
 export {

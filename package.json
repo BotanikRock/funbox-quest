@@ -1,7 +1,8 @@
 {
   "scripts": {
     "prod:build": "export NODE_ENV=production && gulp prod:build --$(cat .gmkey)",
-    "dev:server": "export NODE_ENV=development && gulp dev:server --$(cat .gmkey)"
+    "dev:server": "export NODE_ENV=development && gulp dev:server --$(cat .gmkey)",
+    "test": "export TEST_GMKEY=$(cat .gmkey) && jest"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
@@ -20,6 +21,7 @@
     "gulp-concat-css": "^3.1.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
+    "jest": "^24.5.0",
     "node-sass": "^4.11.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",

@@ -8,7 +8,7 @@ const initialState = {
   isRequesting: false,
 };
 
-export default (state = initialState, {type, payload}) => {
+const reducer = (state = initialState, {type, payload}) => {
   const {points} = state;
 
   switch (type) {
@@ -35,10 +35,12 @@ export default (state = initialState, {type, payload}) => {
     case CHANGE_POINT_ORDER:
       const {oldIndex, newIndex} = payload;
 
-      const s = moveItemInArray(points, oldIndex, newIndex);
+      const rearrangedPoints = moveItemInArray(points, oldIndex, newIndex);
 
-      return {...state, points: s};
+      return {...state, points: rearrangedPoints};
     default:
       return state;
   }
 };
+
+export {initialState, reducer};

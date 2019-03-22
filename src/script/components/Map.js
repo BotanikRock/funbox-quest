@@ -43,7 +43,7 @@ class Map extends Component {
       [startLocation];
 
      return [...acc, ...markerLocation];
-   }, []).map((markerOpt, index, array) => {
+   }, []).map((markerOpt, index) => {
      const {lat, lng} = markerOpt.toJSON();
 
      const props =

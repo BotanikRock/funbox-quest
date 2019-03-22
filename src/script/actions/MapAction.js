@@ -16,6 +16,7 @@ class RouteRequester {
   }
 
   /**
+   * @return {*}
    */
   request() {
     this.dispatch({
@@ -31,6 +32,15 @@ class RouteRequester {
 
     const waypoints = points.slice(1, points.length - 1);
 
+    if (!beginroute) {
+      this.dispatch({
+        type: BUILD_ROUTE_SUCCESS,
+        payload: {directions: null},
+      });
+
+      return;
+    }
+
     const requestOptions = {
       origin: new google.maps.LatLng(beginroute.lat, beginroute.lng),
       destination: new google.maps.LatLng(endRoute.lat, endRoute.lng),
@@ -39,11 +49,15 @@ class RouteRequester {
       travelMode: google.maps.TravelMode.WALKING,
     };
 
-    DirectionsService.route(requestOptions, (result) => {
-      this.dispatch({
-        type: BUILD_ROUTE_SUCCESS,
-        payload: {directions: result},
+    return new Promise((resolve) => {
+      DirectionsService.route(requestOptions, (result) => {
+        this.dispatch({
+          type: BUILD_ROUTE_SUCCESS,
+          payload: {directions: result},
+        });
       });
+
+      resolve();
     });
   }
 }
@@ -56,7 +70,7 @@ const changeCurrentCoord = ({lat, lng}) => ({
 const buildRoute = (points) => (dispatch) => {
   const requester = new RouteRequester(points, dispatch);
 
-  requester.request();
+  return requester.request();
 };
 
 export {

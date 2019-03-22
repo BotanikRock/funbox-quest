@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import pointsReducer from './points';
-import mapReducer from './map';
+import {reducer as pointsReducer, initialState as mapState} from './points';
+import {reducer as mapReducer, initialState as pointState} from './map';
 
 
 const reducers = combineReducers({
@@ -8,4 +8,6 @@ const reducers = combineReducers({
   map: mapReducer,
 });
 
-export default reducers;
+const initialState = {...pointState, ...mapState};
+
+export {reducers, initialState};
