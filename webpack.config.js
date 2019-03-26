@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const gmKey = process.argv[3].slice(2).trim();
+const gmKey = process.env.GMKEY.trim();
+
+console.log(gmKey);
 
 if (!gmKey || gmKey === '') {
-  console.error('provide .gmkey file with google maps api key');
+  console.error('provide .gmkey file with google-maps api key');
   process.exit();
 }
 

@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "prod:build": "export NODE_ENV=production && gulp prod:build --$(cat .gmkey)",
-    "dev:server": "export NODE_ENV=development && gulp dev:server --$(cat .gmkey)",
+    "prod:build": "export NODE_ENV=production && export GMKEY=$(cat .gmkey) && gulp prod:build",
+    "dev:server": "export NODE_ENV=development && export GMKEY=$(cat .gmkey) && gulp dev:server",
     "test": "export TEST_GMKEY=$(cat .gmkey) && jest"
   },
   "devDependencies": {
